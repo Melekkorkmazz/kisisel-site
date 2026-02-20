@@ -135,4 +135,15 @@ function loadTasks() {
     });
 
     updateTaskCount();
+    // Dark Mode aç/kapat
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+
+    // Ayarı kaydet
+    if (document.body.classList.contains("dark")) {
+        localStorage.setItem("darkMode", "enabled");
+    } else {
+        localStorage.setItem("darkMode", "disabled");
+    }
+}
 }

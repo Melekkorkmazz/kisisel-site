@@ -92,3 +92,23 @@ li button {
     padding: 5px 10px;
     cursor: pointer;
 }
+/* Dark Mode */
+.dark {
+    background-color: #1e1e1e;
+    color: white;
+}
+
+.dark li {
+    background-color: #2c2c2c;
+}
+
+.dark input,
+.dark button {
+    background-color: #444;
+    color: white;
+    border: none;
+}
+
+.dark button:hover {
+    background-color: #666;
+}
