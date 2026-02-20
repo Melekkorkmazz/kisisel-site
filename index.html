@@ -1,32 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-    <title>Melek ToDo App</title>
+    <meta charset="UTF-8">
+    <title>Görev Listem</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1>📝 To-Do List</h1>
-        <p>Görevlerini ekle ve yönet</p>
+<div class="container">
+    <h1>Görev Listem</h1>
 
-        <div class="input-area">
-            <input type="text" id="taskInput" placeholder="Yeni görev yaz...">
-            <button onclick="addTask()">Ekle</button>
-        </div>
+    <button class="dark-btn" onclick="toggleDarkMode()">Dark Mode</button>
 
-        <div class="filters">
-            <button onclick="filterTasks('all')">Tümü</button>
-            <button onclick="filterTasks('active')">Aktif</button>
-            <button onclick="filterTasks('completed')">Tamamlanan</button>
-        </div>
-        <ul id="taskList"></ul>
-        <div class="task-info">
-            <span id="taskCount">0 görev kaldı</span>
-            <button onclick="clearCompleted()">Tamamlananları Temizle</button>
-        </div>
+    <div class="input-area">
+        <input type="text" id="taskInput" placeholder="Yeni görev yaz...">
+        <button onclick="addTask()">Ekle</button>
     </div>
 
-    <script src="script.js"></script>
+    <div class="filters">
+        <button onclick="filterTasks('all')">Tümü</button>
+        <button onclick="filterTasks('active')">Aktif</button>
+        <button onclick="filterTasks('completed')">Tamamlanan</button>
+    </div>
+
+    <ul id="taskList"></ul>
+
+    <div class="task-info">
+        <span id="taskCount">0 görev kaldı</span>
+        <button onclick="clearCompleted()">Tamamlananları Temizle</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
