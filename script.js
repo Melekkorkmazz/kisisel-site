@@ -17,5 +17,11 @@ function addTask() {
     };
 
     document.getElementById("taskList").appendChild(li);
+   
     input.value = "";
+    document.getElementById("taskInput").addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            addTask();
+        }
+    });
 }
