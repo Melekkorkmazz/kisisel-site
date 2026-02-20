@@ -1,8 +1,12 @@
-// Sayfa açılınca kayıtlı görevleri yükle
 document.addEventListener("DOMContentLoaded", function () {
     loadTasks();
 
-    // Enter ile görev ekleme
+    // Dark mode yükle
+    if (localStorage.getItem("darkMode") === "on") {
+        document.body.classList.add("dark");
+    }
+
+    // Enter ile ekleme
     document.getElementById("taskInput").addEventListener("keypress", function (e) {
         if (e.key === "Enter") {
             addTask();
@@ -10,26 +14,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Görev ekleme
+// Görev ekle
 function addTask() {
     let input = document.getElementById("taskInput");
-    let taskText = input.value.trim();
+    let text = input.value.trim();
+    if (text === "") return;
 
-    if (taskText === "") return;
-
-    createTaskElement(taskText, false);
-
+    createTaskElement(text, false);
     input.value = "";
 
     saveTasks();
     updateTaskCount();
 }
 
-// Görev elementi oluşturma (tekrar kullanılabilir)
+// Görev oluştur
 function createTaskElement(text, completed) {
     let li = document.createElement("li");
 
-    // Checkbox
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = completed;
@@ -39,11 +40,9 @@ function createTaskElement(text, completed) {
         updateTaskCount();
     };
 
-    // Görev metni
     let span = document.createElement("span");
     span.textContent = text;
 
-    // Sil butonu
     let deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Sil";
     deleteBtn.onclick = function () {
@@ -59,49 +58,40 @@ function createTaskElement(text, completed) {
     document.getElementById("taskList").appendChild(li);
 }
 
-// Filtreleme
+// Filtre
 function filterTasks(type) {
     let tasks = document.querySelectorAll("#taskList li");
 
     tasks.forEach(li => {
-        let checkbox = li.querySelector("input");
-        let isCompleted = checkbox.checked;
+        let checked = li.querySelector("input").checked;
 
         if (type === "all") {
             li.style.display = "flex";
-        } 
-        else if (type === "active") {
-            li.style.display = isCompleted ? "none" : "flex";
-        } 
-        else if (type === "completed") {
-            li.style.display = isCompleted ? "flex" : "none";
+        } else if (type === "active") {
+            li.style.display = checked ? "none" : "flex";
+        } else if (type === "completed") {
+            li.style.display = checked ? "flex" : "none";
         }
     });
 }
 
-// Kalan görev sayısı
+// Sayaç
 function updateTaskCount() {
     let tasks = document.querySelectorAll("#taskList li");
     let remaining = 0;
 
     tasks.forEach(li => {
-        let checkbox = li.querySelector("input");
-        if (!checkbox.checked) remaining++;
+        if (!li.querySelector("input").checked) remaining++;
     });
 
-    let counter = document.getElementById("taskCount");
-    if (counter) {
-        counter.textContent = remaining + " görev kaldı";
-    }
+    document.getElementById("taskCount").textContent =
+        remaining + " görev kaldı";
 }
 
 // Tamamlananları temizle
 function clearCompleted() {
-    let tasks = document.querySelectorAll("#taskList li");
-
-    tasks.forEach(li => {
-        let checkbox = li.querySelector("input");
-        if (checkbox.checked) {
+    document.querySelectorAll("#taskList li").forEach(li => {
+        if (li.querySelector("input").checked) {
             li.remove();
         }
     });
@@ -110,40 +100,38 @@ function clearCompleted() {
     updateTaskCount();
 }
 
-// LocalStorage'a kaydet
+// Kaydet
 function saveTasks() {
     let tasks = [];
-    document.querySelectorAll("#taskList li").forEach(li => {
-        let text = li.querySelector("span").textContent;
-        let completed = li.querySelector("input").checked;
 
+    document.querySelectorAll("#taskList li").forEach(li => {
         tasks.push({
-            text: text,
-            completed: completed
+            text: li.querySelector("span").textContent,
+            completed: li.querySelector("input").checked
         });
     });
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-// LocalStorage'dan yükle
+// Yükle
 function loadTasks() {
-    let savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-    savedTasks.forEach(task => {
+    tasks.forEach(task => {
         createTaskElement(task.text, task.completed);
     });
 
     updateTaskCount();
-    // Dark Mode aç/kapat
+}
+
+// Dark Mode
 function toggleDarkMode() {
     document.body.classList.toggle("dark");
 
-    // Ayarı kaydet
     if (document.body.classList.contains("dark")) {
-        localStorage.setItem("darkMode", "enabled");
+        localStorage.setItem("darkMode", "on");
     } else {
-        localStorage.setItem("darkMode", "disabled");
+        localStorage.setItem("darkMode", "off");
     }
-}
 }

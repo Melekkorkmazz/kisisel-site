@@ -1,86 +1,68 @@
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #74ebd5, #9face6);
-    height: 100vh;
+    background: #f4f4f4;
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-top: 40px;
 }
 
 .container {
     background: white;
-    padding: 30px;
-    border-radius: 15px;
-    width: 320px;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    padding: 20px;
+    width: 350px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 h1 {
-    margin-bottom: 5px;
+    text-align: center;
 }
 
 .input-area {
-    margin-top: 15px;
+    display: flex;
+    gap: 10px;
 }
 
 input {
-    padding: 10px;
-    width: 65%;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+    flex: 1;
+    padding: 8px;
 }
 
 button {
-    padding: 10px;
-    border: none;
-    background: #6c63ff;
-    color: white;
-    border-radius: 8px;
+    padding: 8px 12px;
     cursor: pointer;
 }
 
-button:hover {
-    background: #574fd6;
-}
-
-ul {
-    padding: 0;
-    margin-top: 20px;
-}
-
-li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #f2f2f2;
-    padding: 10px;
-    margin-top: 8px;
-    border-radius: 8px;
-    gap: 10px;
-}
-li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 .filters {
-    margin: 10px 0;
+    margin-top: 10px;
+    text-align: center;
 }
 
 .filters button {
-    margin: 5px;
-    padding: 6px 12px;
-    cursor: pointer;
+    margin: 3px;
 }
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f2f2f2;
+    padding: 8px;
+    margin-top: 8px;
+    border-radius: 6px;
+}
+
 li span {
     flex: 1;
     word-break: break-word;
 }
-li button {
-    flex-shrink: 0;
-}
+
 .task-info {
     display: flex;
     justify-content: space-between;
@@ -88,27 +70,28 @@ li button {
     font-size: 14px;
 }
 
-.task-info button {
-    padding: 5px 10px;
-    cursor: pointer;
+.dark-btn {
+    margin-bottom: 10px;
+    width: 100%;
 }
+
 /* Dark Mode */
 .dark {
-    background-color: #1e1e1e;
+    background-color: #121212;
     color: white;
 }
 
+.dark .container {
+    background-color: #1e1e1e;
+}
+
 .dark li {
-    background-color: #2c2c2c;
+    background-color: #2a2a2a;
 }
 
 .dark input,
 .dark button {
-    background-color: #444;
+    background-color: #333;
     color: white;
     border: none;
-}
-
-.dark button:hover {
-    background-color: #666;
 }
