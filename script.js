@@ -13,8 +13,32 @@ function addTask() {
 
     if (taskText === "") return;
 
-    createTaskElement(taskText, false);
+    let li = document.createElement("li");
+
+    // Checkbox
+    let checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+
+    // Görev metni
+    let span = document.createElement("span");
+    span.textContent = taskText;
+
+    // Sil butonu
+    let deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Sil";
+    deleteBtn.onclick = function () {
+        li.remove();
+        saveTasks();
+    };
+
+    li.appendChild(checkbox);
+    li.appendChild(span);
+    li.appendChild(deleteBtn);
+
+    document.getElementById("taskList").appendChild(li);
+
     input.value = "";
+
     saveTasks();
 }
 
