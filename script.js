@@ -121,4 +121,22 @@ function loadTasks() {
             }
         });
     }
+    function filterTasks(type) {
+        let tasks = document.querySelectorAll("#taskList li");
+    
+        tasks.forEach(li => {
+            let checkbox = li.querySelector("input");
+            let isCompleted = checkbox.checked;
+    
+            if (type === "all") {
+                li.style.display = "flex";
+            } 
+            else if (type === "active") {
+                li.style.display = isCompleted ? "none" : "flex";
+            } 
+            else if (type === "completed") {
+                li.style.display = isCompleted ? "flex" : "none";
+            }
+        });
+    }
 }
