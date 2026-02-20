@@ -51,17 +51,44 @@ ul {
 }
 
 li {
-    list-style: none;
-    background: #f4f4f4;
-    margin-top: 8px;
-    padding: 10px;
-    border-radius: 8px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    background: #f2f2f2;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 8px;
+    gap: 10px;
 }
 li {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+.filters {
+    margin: 10px 0;
+}
+
+.filters button {
+    margin: 5px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+li span {
+    flex: 1;
+    word-break: break-word;
+}
+li button {
+    flex-shrink: 0;
+}
+.task-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.task-info button {
+    padding: 5px 10px;
+    cursor: pointer;
 }

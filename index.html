@@ -15,7 +15,16 @@
             <button onclick="addTask()">Ekle</button>
         </div>
 
+        <div class="filters">
+            <button onclick="filterTasks('all')">Tümü</button>
+            <button onclick="filterTasks('active')">Aktif</button>
+            <button onclick="filterTasks('completed')">Tamamlanan</button>
+        </div>
         <ul id="taskList"></ul>
+        <div class="task-info">
+            <span id="taskCount">0 görev kaldı</span>
+            <button onclick="clearCompleted()">Tamamlananları Temizle</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
