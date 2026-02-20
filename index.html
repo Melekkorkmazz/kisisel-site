@@ -2,7 +2,10 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Görev Listem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -10,11 +13,13 @@
 <div class="container">
     <h1>Görev Listem</h1>
 
-    <button class="dark-btn" onclick="toggleDarkMode()">Dark Mode</button>
+    <button class="dark-btn" onclick="toggleDarkMode()">
+        <i class="fas fa-moon"></i> Dark Mode
+    </button>
 
     <div class="input-area">
         <input type="text" id="taskInput" placeholder="Yeni görev yaz...">
-        <button onclick="addTask()">Ekle</button>
+        <button onclick="addTask()"><i class="fas fa-plus"></i> Ekle</button>
     </div>
 
     <div class="filters">
@@ -27,7 +32,7 @@
 
     <div class="task-info">
         <span id="taskCount">0 görev kaldı</span>
-        <button onclick="clearCompleted()">Tamamlananları Temizle</button>
+        <button onclick="clearCompleted()"><i class="fas fa-broom"></i> Tamamlananları Temizle</button>
     </div>
 </div>
 

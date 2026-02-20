@@ -1,97 +1,91 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
+    font-family: 'Poppins', sans-serif; /* Modern yazı tipi */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Dinamik arka plan */
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
 .container {
-    background: white;
-    padding: 20px;
-    width: 350px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.2); /* Cam efekti */
+    backdrop-filter: blur(15px); /* Arkayı bulanıklaştırma */
+    -webkit-backdrop-filter: blur(15px);
+    padding: 25px;
+    width: 380px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
 }
 
-h1 {
-    text-align: center;
-}
+h1 { text-align: center; margin-bottom: 20px; }
 
-.input-area {
-    display: flex;
-    gap: 10px;
-}
+.input-area { display: flex; gap: 10px; }
 
 input {
     flex: 1;
-    padding: 8px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    outline: none;
 }
+
+input::placeholder { color: rgba(255, 255, 255, 0.7); }
 
 button {
-    padding: 8px 12px;
+    padding: 10px 15px;
     cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background: #667eea;
+    color: white;
+    transition: 0.3s ease;
 }
 
-.filters {
-    margin-top: 10px;
-    text-align: center;
-}
+button:hover { transform: scale(1.05); background: #5a67d8; }
+
+.filters { margin: 15px 0; text-align: center; }
 
 .filters button {
     margin: 3px;
+    background: rgba(255, 255, 255, 0.15);
+    font-size: 13px;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
-}
+ul { list-style: none; padding: 0; margin-top: 15px; }
 
 li {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: #f2f2f2;
-    padding: 8px;
-    margin-top: 8px;
-    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-li span {
-    flex: 1;
-    word-break: break-word;
+/* Tamamlanan görev için stil ekledik */
+.completed-text {
+    text-decoration: line-through;
+    opacity: 0.6;
 }
 
 .task-info {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
-    font-size: 14px;
+    margin-top: 20px;
+    font-size: 13px;
 }
 
-.dark-btn {
-    margin-bottom: 10px;
-    width: 100%;
-}
+.dark-btn { width: 100%; margin-bottom: 15px; background: #333; }
 
 /* Dark Mode */
 .dark {
-    background-color: #121212;
-    color: white;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 }
-
-.dark .container {
-    background-color: #1e1e1e;
-}
-
-.dark li {
-    background-color: #2a2a2a;
-}
-
-.dark input,
-.dark button {
-    background-color: #333;
-    color: white;
-    border: none;
-}
+.dark .container { background: rgba(0, 0, 0, 0.4); }
