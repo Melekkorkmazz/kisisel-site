@@ -80,4 +80,21 @@ function loadTasks() {
     tasks.forEach(task => {
         createTaskElement(task.text, task.completed);
     });
+    function filterTasks(type) {
+        let tasks = document.querySelectorAll("#taskList li");
+    
+        tasks.forEach(li => {
+            let isCompleted = li.querySelector("input").checked;
+    
+            if (type === "all") {
+                li.style.display = "flex";
+            } 
+            else if (type === "active") {
+                li.style.display = isCompleted ? "none" : "flex";
+            } 
+            else if (type === "completed") {
+                li.style.display = isCompleted ? "flex" : "none";
+            }
+        });
+    }
 }
