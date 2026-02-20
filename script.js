@@ -1,3 +1,13 @@
+// Sayfa açılınca kayıtlı görevleri yükle
+document.addEventListener("DOMContentLoaded", loadTasks);
+
+// Enter ile ekleme
+document.getElementById("taskInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        addTask();
+    }
+});
+
 function addTask() {
     let input = document.getElementById("taskInput");
     let taskText = input.value.trim();
@@ -7,21 +17,44 @@ function addTask() {
         return;
     }
 
-    let li = document.createElement("li");
-    li.textContent = taskText;
+    createTaskElement(taskText);
+    input.value = "";
+    saveTasks();
+}
 
-    // Tıklayınca tamamlandı efekti
-    li.onclick = function () {
-        li.style.textDecoration = "line-through";
-        li.style.opacity = "0.6";
+function createTaskElement(taskText) {
+    let li = document.createElement("li");
+
+    let span = document.createElement("span");
+    span.textContent = taskText;
+
+    let deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Sil";
+
+    deleteBtn.onclick = function () {
+        li.remove();
+        saveTasks();
     };
 
+    li.appendChild(span);
+    li.appendChild(deleteBtn);
+
     document.getElementById("taskList").appendChild(li);
-   
-    input.value = "";
-    document.getElementById("taskInput").addEventListener("keypress", function(e) {
-        if (e.key === "Enter") {
-            addTask();
-        }
+}
+
+function saveTasks() {
+    let tasks = [];
+    document.querySelectorAll("#taskList span").forEach(span => {
+        tasks.push(span.textContent);
+    });
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function loadTasks() {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    tasks.forEach(task => {
+        createTaskElement(task);
     });
 }
