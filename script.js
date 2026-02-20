@@ -1,18 +1,21 @@
 function addTask() {
     let input = document.getElementById("taskInput");
-    let taskText = input.value;
+    let taskText = input.value.trim();
 
-    if (taskText === "") return;
+    if (taskText === "") {
+        alert("Lütfen bir görev yaz!");
+        return;
+    }
 
     let li = document.createElement("li");
     li.textContent = taskText;
 
-    // Tıklayınca sil
+    // Tıklayınca tamamlandı efekti
     li.onclick = function () {
-        li.remove();
+        li.style.textDecoration = "line-through";
+        li.style.opacity = "0.6";
     };
 
     document.getElementById("taskList").appendChild(li);
-
     input.value = "";
 }
