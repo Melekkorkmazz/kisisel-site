@@ -81,3 +81,14 @@ li span {
 li button {
     flex-shrink: 0;
 }
+.task-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.task-info button {
+    padding: 5px 10px;
+    cursor: pointer;
+}
