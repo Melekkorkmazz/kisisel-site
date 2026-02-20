@@ -14,7 +14,12 @@
             <input type="text" id="taskInput" placeholder="Yeni görev yaz...">
             <button onclick="addTask()">Ekle</button>
         </div>
-
+        
+        <div class="filters">
+            <button onclick="filterTasks('all')">Tümü</button>
+            <button onclick="filterTasks('active')">Aktif</button>
+            <button onclick="filterTasks('completed')">Tamamlanan</button>
+        </div>
         <ul id="taskList"></ul>
     </div>
 
