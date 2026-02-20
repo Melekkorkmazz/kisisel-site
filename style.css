@@ -65,3 +65,12 @@ li {
     align-items: center;
     gap: 10px;
 }
+.filters {
+    margin: 10px 0;
+}
+
+.filters button {
+    margin: 5px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
