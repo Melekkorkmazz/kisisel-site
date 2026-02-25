@@ -1,2 +1,2 @@
 FROM nginx:alpine
-COPY . /usr/share/nginx/html
+COPY . /usr/share/nginx/htmlcd ~/Desktop/kisisel-site
