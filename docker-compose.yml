@@ -1,6 +1,8 @@
 version: '3.8'
 
 services:
+volumes:
+  db_data:
   web:
     build: .
     container_name: kisisel-web
