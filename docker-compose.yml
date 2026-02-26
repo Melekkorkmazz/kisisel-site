@@ -10,14 +10,15 @@ services:
       - db
 
   db:
-    image: mysql:8.0
-    container_name: mysql-db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: testdb
-    ports:
-      - "3306:3306"
+   db:
+  image: mysql:8.0
+  container_name: mysql-db
+  restart: always
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: testdb
+  ports:
+    - "3306:3306"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
