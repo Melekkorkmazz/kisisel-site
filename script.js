@@ -1,137 +1,146 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
     loadTasks();
-
-    // Dark mode yükle
-    if (localStorage.getItem("darkMode") === "on") {
-        document.body.classList.add("dark");
+    // Kayıtlı temayı yükle
+    if (localStorage.getItem("auroraTheme") === "dark") {
+        document.body.classList.replace("light-theme", "dark-theme");
     }
-
-    // Enter ile ekleme
-    document.getElementById("taskInput").addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-            addTask();
-        }
-    });
 });
 
-// Görev ekle
+function toggleDarkMode() {
+    const body = document.body;
+    if (body.classList.contains("light-theme")) {
+        body.classList.replace("light-theme", "dark-theme");
+        localStorage.setItem("auroraTheme", "dark");
+    } else {
+        body.classList.replace("dark-theme", "light-theme");
+        localStorage.setItem("auroraTheme", "light");
+    }
+}
+
 function addTask() {
-    let input = document.getElementById("taskInput");
-    let text = input.value.trim();
-    if (text === "") return;
+    const titleInp = document.getElementById("taskInput");
+    const detailInp = document.getElementById("taskDetail");
+    
+    if (titleInp.value.trim() === "") {
+        alert("Lütfen bir başlık girin!");
+        return;
+    }
 
-    createTaskElement(text, false);
-    input.value = "";
-
+    createTaskElement(titleInp.value.trim(), detailInp.value.trim(), false);
+    titleInp.value = ""; detailInp.value = "";
     saveTasks();
     updateTaskCount();
 }
 
-// Görev oluştur
-function createTaskElement(text, completed) {
-    let li = document.createElement("li");
+function createTaskElement(title, detail, completed) {
+    const li = document.createElement("li");
 
-    let checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = completed;
+    const header = document.createElement("div");
+    header.className = "task-header";
+    header.innerHTML = `
+        <input type="checkbox" ${completed ? 'checked' : ''} onclick="event.stopPropagation()">
+        <span class="${completed ? 'completed-text' : ''}" style="flex:1">${title}</span>
+        <button class="delete-btn" onclick="deleteTask(event, this)"><i class="fas fa-trash"></i></button>
+    `;
 
-    checkbox.onchange = function () {
+    const content = document.createElement("div");
+    content.className = "task-content";
+    content.innerHTML = `
+        <p>${detail || 'Açıklama yok.'}</p>
+        <button class="edit-btn-inline" onclick="editTask(this)"><i class="fas fa-edit"></i> Düzenle</button>
+    `;
+
+    header.onclick = () => content.classList.toggle("show-detail");
+    
+    const checkbox = header.querySelector("input");
+    checkbox.onchange = () => {
+        header.querySelector("span").classList.toggle("completed-text", checkbox.checked);
         saveTasks();
         updateTaskCount();
     };
 
-    let span = document.createElement("span");
-    span.textContent = text;
-
-    let deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Sil";
-    deleteBtn.onclick = function () {
-        li.remove();
-        saveTasks();
-        updateTaskCount();
-    };
-
-    li.appendChild(checkbox);
-    li.appendChild(span);
-    li.appendChild(deleteBtn);
-
+    li.appendChild(header);
+    li.appendChild(content);
     document.getElementById("taskList").appendChild(li);
 }
 
-// Filtre
+function deleteTask(e, btn) {
+    e.stopPropagation();
+    if (confirm("Bu görevi silmek istiyor musunuz?")) {
+        btn.closest("li").remove();
+        saveTasks();
+        updateTaskCount();
+    }
+}
+
+function editTask(btn) {
+    const li = btn.closest("li");
+    const span = li.querySelector(".task-header span");
+    const p = li.querySelector(".task-content p");
+
+    if (btn.innerText.includes("Düzenle")) {
+        const oldTitle = span.innerText;
+        const oldDetail = p.innerText === "Açıklama yok." ? "" : p.innerText;
+        span.innerHTML = `<input type="text" value="${oldTitle}" class="edit-field">`;
+        p.innerHTML = `<textarea class="edit-field">${oldDetail}</textarea>`;
+        btn.innerHTML = `<i class="fas fa-save"></i> Kaydet`;
+    } else {
+        const newTitle = span.querySelector("input").value;
+        const newDetail = p.querySelector("textarea").value;
+        span.innerText = newTitle || "Başlıksız";
+        p.innerText = newDetail || "Açıklama yok.";
+        btn.innerHTML = `<i class="fas fa-edit"></i> Düzenle`;
+        saveTasks();
+    }
+}
+
 function filterTasks(type) {
-    let tasks = document.querySelectorAll("#taskList li");
-
-    tasks.forEach(li => {
-        let checked = li.querySelector("input").checked;
-
-        if (type === "all") {
-            li.style.display = "flex";
-        } else if (type === "active") {
-            li.style.display = checked ? "none" : "flex";
-        } else if (type === "completed") {
-            li.style.display = checked ? "flex" : "none";
+    // Filtre butonlarının aktiflik durumunu güncelle
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.innerText.toLowerCase().includes(type === 'all' ? 'tümü' : type === 'active' ? 'aktif' : 'bitenler')) {
+            btn.classList.add('active');
         }
+    });
+
+    const tasks = document.querySelectorAll("#taskList li");
+    tasks.forEach(li => {
+        const checked = li.querySelector("input").checked;
+        if (type === 'all') li.style.display = "block";
+        else if (type === 'active') li.style.display = checked ? "none" : "block";
+        else if (type === 'completed') li.style.display = checked ? "block" : "none";
     });
 }
 
-// Sayaç
 function updateTaskCount() {
-    let tasks = document.querySelectorAll("#taskList li");
-    let remaining = 0;
-
-    tasks.forEach(li => {
-        if (!li.querySelector("input").checked) remaining++;
-    });
-
-    document.getElementById("taskCount").textContent =
-        remaining + " görev kaldı";
+    const count = Array.from(document.querySelectorAll("#taskList li input")).filter(i => !i.checked).length;
+    document.getElementById("taskCount").innerText = `${count} görev kaldı`;
 }
 
-// Tamamlananları temizle
-function clearCompleted() {
-    document.querySelectorAll("#taskList li").forEach(li => {
-        if (li.querySelector("input").checked) {
-            li.remove();
-        }
-    });
-
-    saveTasks();
-    updateTaskCount();
-}
-
-// Kaydet
 function saveTasks() {
-    let tasks = [];
-
+    const data = [];
     document.querySelectorAll("#taskList li").forEach(li => {
-        tasks.push({
-            text: li.querySelector("span").textContent,
-            completed: li.querySelector("input").checked
+        data.push({
+            title: li.querySelector(".task-header span").innerText,
+            detail: li.querySelector(".task-content p").innerText,
+            completed: li.querySelector(".task-header input").checked
         });
     });
-
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("auroraTasks", JSON.stringify(data));
 }
 
-// Yükle
 function loadTasks() {
-    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-    tasks.forEach(task => {
-        createTaskElement(task.text, task.completed);
-    });
-
+    const data = JSON.parse(localStorage.getItem("auroraTasks") || "[]");
+    data.forEach(t => createTaskElement(t.title, t.detail, t.completed));
     updateTaskCount();
 }
 
-// Dark Mode
-function toggleDarkMode() {
-    document.body.classList.toggle("dark");
-
-    if (document.body.classList.contains("dark")) {
-        localStorage.setItem("darkMode", "on");
-    } else {
-        localStorage.setItem("darkMode", "off");
+function clearCompleted() {
+    if(confirm("Biten görevler temizlensin mi?")) {
+        document.querySelectorAll("#taskList li").forEach(li => {
+            if(li.querySelector("input").checked) li.remove();
+        });
+        saveTasks();
+        updateTaskCount();
     }
 }
