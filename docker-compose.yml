@@ -1,11 +1,11 @@
-version: '3.8'
-
 services:
   web:
     build: .
     container_name: kisisel-web
     ports:
       - "8090:80"
+    volumes:
+      - ./web:/var/www/html:cached   # Live reload için volume mount
     depends_on:
       - db
 
