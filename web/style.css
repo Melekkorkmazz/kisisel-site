@@ -1,0 +1,146 @@
+:root {
+    /* Açık Tema Renkleri */
+    --bg-color: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(0, 0, 0, 0.05);
+    --input-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-sub: #64748b;
+    --accent: #6366f1;
+    --filter-bg: #e2e8f0;
+}
+
+body.dark-theme {
+    /* Gece Modu (Tam Siyah) Renkleri */
+    --bg-color: #000000;
+    --card-bg: rgba(18, 18, 18, 0.8);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --input-bg: #121212;
+    --text-main: #f8fafc;
+    --text-sub: #94a3b8;
+    --filter-bg: #1e1e1e;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.aurora-container {
+    width: 90%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+input, textarea {
+    background: var(--input-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px;
+    color: var(--text-main);
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input:focus { border-color: var(--accent); }
+
+.add-btn {
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+.filter-bar {
+    display: flex;
+    background: var(--filter-bg);
+    padding: 5px;
+    border-radius: 12px;
+}
+
+.filter-btn {
+    flex: 1;
+    padding: 8px;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-sub);
+    border: none;
+    cursor: pointer;
+}
+
+.filter-btn.active {
+    background: var(--accent);
+    color: white;
+}
+
+.task-grid { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+
+li {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.task-header { display: flex; align-items: center; padding: 15px; gap: 12px; cursor: pointer; }
+
+.task-content {
+    display: none;
+    padding: 0 15px 15px 42px;
+    font-size: 0.85rem;
+    color: var(--text-sub);
+    border-top: 1px solid var(--card-border);
+}
+
+.show-detail { display: block; }
+
+.completed-text { text-decoration: line-through; opacity: 0.5; }
+
+.delete-btn { background: #ff4d4d; color: white; padding: 5px 10px; border-radius: 8px; border: none; }
+
+.edit-btn-inline { background: #f39c12; color: white; margin-top: 10px; padding: 5px 10px; border-radius: 8px; border: none; cursor: pointer; }
+
+.edit-field { width: 100%; background: var(--input-bg); color: var(--text-main); border: 1px solid var(--accent); border-radius: 5px; padding: 5px; }
+
+.theme-toggle { background: var(--filter-bg); color: var(--text-main); border-radius: 50%; width: 40px; height: 40px; border: none; cursor: pointer; }

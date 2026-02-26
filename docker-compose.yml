@@ -5,7 +5,7 @@ services:
     ports:
       - "8090:80"
     volumes:
-      - ./web:/var/www/html:cached   # Live reload için volume mount
+      - ./web:/var/www/html:cached
     depends_on:
       - db
 
@@ -23,6 +23,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    platform: linux/amd64    # M1/M2 Mac uyumu
     container_name: phpmyadmin
     restart: always
     ports:
