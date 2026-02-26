@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Görev Listem</title>
+    <title>Profesyonel Görev Listem</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -14,25 +14,26 @@
     <h1>Görev Listem</h1>
 
     <button class="dark-btn" onclick="toggleDarkMode()">
-        <i class="fas fa-moon"></i> Dark Mode
+        <i class="fas fa-adjust"></i> Mod Değiştir
     </button>
 
     <div class="input-area">
-        <input type="text" id="taskInput" placeholder="Yeni görev yaz...">
+        <input type="text" id="taskInput" placeholder="Görev Başlığı...">
+        <textarea id="taskDetail" placeholder="Görev Detayı (Opsiyonel)..."></textarea>
         <button onclick="addTask()"><i class="fas fa-plus"></i> Ekle</button>
     </div>
 
     <div class="filters">
         <button onclick="filterTasks('all')">Tümü</button>
         <button onclick="filterTasks('active')">Aktif</button>
-        <button onclick="filterTasks('completed')">Tamamlanan</button>
+        <button onclick="filterTasks('completed')">Bitenler</button>
     </div>
 
     <ul id="taskList"></ul>
 
     <div class="task-info">
         <span id="taskCount">0 görev kaldı</span>
-        <button onclick="clearCompleted()"><i class="fas fa-broom"></i> Tamamlananları Temizle</button>
+        <button onclick="clearCompleted()"><i class="fas fa-broom"></i> Temizle</button>
     </div>
 </div>
 
