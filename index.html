@@ -3,38 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profesyonel Görev Listem</title>
+    <title>Aurora Task Manager</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="light-theme"> <div class="aurora-container">
+    <header class="main-header">
+        <div class="logo-area">
+            <i class="fas fa-layer-group"></i>
+            <span>Aurora</span>
+        </div>
+        <button class="theme-toggle" onclick="toggleDarkMode()">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
 
-<div class="container">
-    <h1>Görev Listem</h1>
-
-    <button class="dark-btn" onclick="toggleDarkMode()">
-        <i class="fas fa-adjust"></i> Mod Değiştir
-    </button>
-
-    <div class="input-area">
-        <input type="text" id="taskInput" placeholder="Görev Başlığı...">
-        <textarea id="taskDetail" placeholder="Görev Detayı (Opsiyonel)..."></textarea>
-        <button onclick="addTask()"><i class="fas fa-plus"></i> Ekle</button>
+    <div class="glass-card input-section">
+        <input type="text" id="taskInput" placeholder="Görev Başlığı..." autocomplete="off">
+        <textarea id="taskDetail" placeholder="Detay eklemek için buraya yazın (isteğe bağlı)..."></textarea>
+        <button class="add-btn" onclick="addTask()">
+            <i class="fas fa-plus"></i> Görev Ekle
+        </button>
     </div>
 
-    <div class="filters">
-        <button onclick="filterTasks('all')">Tümü</button>
-        <button onclick="filterTasks('active')">Aktif</button>
-        <button onclick="filterTasks('completed')">Bitenler</button>
-    </div>
+    <nav class="filter-bar">
+        <button onclick="filterTasks('all')" class="filter-btn active">Tümü</button>
+        <button onclick="filterTasks('active')" class="filter-btn">Aktif</button>
+        <button onclick="filterTasks('completed')" class="filter-btn">Bitenler</button>
+    </nav>
 
-    <ul id="taskList"></ul>
+    <ul id="taskList" class="task-grid"></ul>
 
-    <div class="task-info">
-        <span id="taskCount">0 görev kaldı</span>
-        <button onclick="clearCompleted()"><i class="fas fa-broom"></i> Temizle</button>
-    </div>
+    <footer class="status-bar">
+        <div class="count-chip">
+            <i class="fas fa-clipboard-list"></i>
+            <span id="taskCount">0 görev kaldı</span>
+        </div>
+        <button class="clean-btn" onclick="clearCompleted()">
+            <i class="fas fa-sparkles"></i> Temizle
+        </button>
+    </footer>
 </div>
 
 <script src="script.js"></script>
