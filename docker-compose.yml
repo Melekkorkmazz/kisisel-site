@@ -1,8 +1,6 @@
 version: '3.8'
 
 services:
-volumes:
-  db_data:
   web:
     build: .
     container_name: kisisel-web
@@ -12,17 +10,17 @@ volumes:
       - db
 
   db:
-  image: mysql:8.0
-  container_name: mysql-db
-  restart: always
-  environment:
-    MYSQL_ROOT_PASSWORD: root
-    MYSQL_DATABASE: testdb
-  ports:
-    - "3306:3306"
-  volumes:
-    - db_data:/var/lib/mysql
-    
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
@@ -34,3 +32,6 @@ volumes:
       MYSQL_ROOT_PASSWORD: root
     depends_on:
       - db
+
+volumes:
+  db_data:
